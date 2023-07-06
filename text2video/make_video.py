@@ -13,5 +13,13 @@ def save_video(
 
 
 if __name__ == '__main__':
-    pass
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--out', type=str, required=True, help='output root')
+    parser.add_argument("--spath", type=str, required=True, help= 'input skeleton video path')
+    parser.add_argument("--text_prompt", type=str, required=True, help='text prompt')
+
+    args = parser.parse_args()
+
+    save_video(args.text_prompt, args.spath, args.text_prompt)
+
     
