@@ -12,4 +12,6 @@ def save_video(
     model.process_controlnet_pose(text_prompt, prompt=text_prompt, save_path=os.path.join(output_root, text_prompt, "*.mp4"))
 
 
+if __name__ == '__main__':
+    pass
     

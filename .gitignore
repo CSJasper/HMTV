@@ -1,3 +1,5 @@
 *.pt
 *.pth
 *.pkl
+
+text2video/Text2Video-Zero
