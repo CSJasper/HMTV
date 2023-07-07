@@ -27,15 +27,17 @@ if __name__ == '__main__':
 
 os.environ["PYOPENGL_PLATFORM"] = "egl"
 os.environ["MESA_GL_VERSION_OVERRIDE"] = "4.1"
-sys.argv = ["./VQ-Trans/GPT_eval_multi.py"]
-sys.path.append("./VQ-Trans")
-sys.path.append("./pyrender")
+#sys.argv = ["./VQ-Trans/GPT_eval_multi.py"]
+#sys.path.append("./VQ-Trans")
+#sys.path.append("./pyrender")
 
 args = option_trans.get_args_parser()
 
+root_dir = './' if __name__ == "__main__" else os.path.join(os.getcwd(), "text2mesh")
+
 args.dataname = "t2m"
-args.resume_pth = "./pretrained/VQVAE/net_last.pth"
-args.resume_trans = "./pretrained/VQTransformer_corruption05/net_best_fid.pth"
+args.resume_pth = "./pretrained/VQVAE/net_last.pth" if __name__ == '__main' else os.path.join(root_dir, "pretrained/VQVAE/net_last.pth")
+args.resume_trans = "./pretrained/VQTransformer_corruption05/net_best_fid.pth" if __name__ == '__main__' else os.path.join(root_dir, "pretrained/VQTransformer_corruption05/net_best_fid.pth")
 args.down_t = 2
 args.depth = 3
 args.block_size = 51
@@ -45,7 +47,7 @@ is_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if is_cuda else "cpu")
 print(device)
 clip_model, clip_preprocess = clip.load(
-    "ViT-B/32", device=device, jit=False, download_root="./"
+    "ViT-B/32", device=device, jit=False, download_root=root_dir
 )  # Must set jit=False for training
 
 if is_cuda:
@@ -89,8 +91,8 @@ ckpt = torch.load(args.resume_trans, map_location="cpu")
 trans_encoder.load_state_dict(ckpt["trans"], strict=True)
 trans_encoder.eval()
 
-mean = torch.from_numpy(np.load("./meta/Mean.npy"))
-std = torch.from_numpy(np.load("./meta/Std.npy"))
+mean = torch.from_numpy(np.load(os.path.join(root_dir, "meata/Mean.npy")))
+std = torch.from_numpy(np.load(os.path.join(root_dir, "meta/Std.npy")))
 
 
 if is_cuda:
