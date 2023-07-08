@@ -26,7 +26,13 @@ pip install ftfy regex tqdm
 pip install git+https://github.com/openai/CLIP.git 
 ```
 
-## Quick Start
+## Demo
+Demo is available in `demo.ipynb`
+Before running demo you should run the script below
+```
+bash prepare_t2v.sh
+```
 
-### Text to Mesh generation
+This script clone T2V-Zero and prepare the environment.
 
+If you want to try another T2V models run `clean_t2v.sh` before cloning them.

@@ -9,7 +9,7 @@ def save_video(
         output_root
 ):
     model = Model(device='cuda', dtype=torch.float16)
-    model.process_controlnet_pose(text_prompt, prompt=text_prompt, save_path=os.path.join(output_root, text_prompt, "*.mp4"))
+    model.process_controlnet_pose(prompt=text_prompt, video_path=skeleton_path, save_path=os.path.join(output_root, f'{text_prompt}.mp4'))
 
 
 if __name__ == '__main__':
@@ -20,6 +20,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    save_video(args.text_prompt, args.spath, args.text_prompt)
+    save_video(args.text_prompt, args.spath, args.out)
 
     

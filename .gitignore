@@ -1,5 +1,7 @@
 *.pt
 *.pth
 *.pkl
+*.mp4
+*.vts
 
 text2video/Text2Video-Zero

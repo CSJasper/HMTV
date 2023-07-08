@@ -1,3 +1,8 @@
+import os
+import sys
+
+root_dir = './' #if __name__ == "__main__" else os.path.join(os.getcwd(), "text2mesh")
+
 import clip
 import torch
 import numpy as np
@@ -9,11 +14,11 @@ import numpy as np
 import gc
 from visualize.simplify_loc2rot import joints2smpl
 from tqdm import tqdm
-import sys
-import os
 import options.option_transformer as option_trans
 import argparse
 import json
+
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -31,9 +36,7 @@ os.environ["MESA_GL_VERSION_OVERRIDE"] = "4.1"
 #sys.path.append("./VQ-Trans")
 #sys.path.append("./pyrender")
 
-args = option_trans.get_args_parser()
-
-root_dir = './' if __name__ == "__main__" else os.path.join(os.getcwd(), "text2mesh")
+args = option_trans.get_args_parser(__name__ == '__main__')
 
 args.dataname = "t2m"
 args.resume_pth = "./pretrained/VQVAE/net_last.pth" if __name__ == '__main' else os.path.join(root_dir, "pretrained/VQVAE/net_last.pth")
@@ -91,7 +94,7 @@ ckpt = torch.load(args.resume_trans, map_location="cpu")
 trans_encoder.load_state_dict(ckpt["trans"], strict=True)
 trans_encoder.eval()
 
-mean = torch.from_numpy(np.load(os.path.join(root_dir, "meata/Mean.npy")))
+mean = torch.from_numpy(np.load(os.path.join(root_dir, "meta/Mean.npy")))
 std = torch.from_numpy(np.load(os.path.join(root_dir, "meta/Std.npy")))
 
 
