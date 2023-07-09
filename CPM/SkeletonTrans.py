@@ -165,6 +165,7 @@ def draw_joint_at_Pixel_moving_camera(joint3D, img_shape, n_frame,length,zoom,zo
     # rotation_coef => [1.5,1.5,1.5] => [1.5*x,1.5*y,1.5*z]
 
     # this line is to apply rotation
+
     camera_pose = np.eye(4)
     camera_pose[:3, 3] = np.array([0, 0, 4])
     if rotation != [0,0,0]:
@@ -202,8 +203,11 @@ def draw_joint_at_Pixel_moving_camera(joint3D, img_shape, n_frame,length,zoom,zo
     
     x = joint_cam_coord[:,0] / joint_cam_coord[:,2] * focal[0] + princ_pt[0]
     y = joint_cam_coord[:,1] / joint_cam_coord[:,2] * focal[1] + princ_pt[1]
-    y = img_y - y
+    y = img_y - y 
     
+    #assert np.all(x <= img_x), "x coordinates must be inside the image"
+    #assert np.all(y <= img_y), "y coordinates must be inside the image"
+
     # z = cam_coord[:,2]
     return np.stack((x,y),1)
 

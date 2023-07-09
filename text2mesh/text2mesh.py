@@ -29,6 +29,8 @@ if __name__ == '__main__':
 
     input_json = args.input
     output_root = args.output
+    parser = None
+    gc.collect()
 
 os.environ["PYOPENGL_PLATFORM"] = "egl"
 os.environ["MESA_GL_VERSION_OVERRIDE"] = "4.1"
@@ -36,7 +38,7 @@ os.environ["MESA_GL_VERSION_OVERRIDE"] = "4.1"
 #sys.path.append("./VQ-Trans")
 #sys.path.append("./pyrender")
 
-args = option_trans.get_args_parser(__name__ == '__main__')
+args = option_trans.get_args_parser()
 
 args.dataname = "t2m"
 args.resume_pth = "./pretrained/VQVAE/net_last.pth" if __name__ == '__main' else os.path.join(root_dir, "pretrained/VQVAE/net_last.pth")
@@ -111,7 +113,7 @@ def render(motions)->None:
     MINS = motions.min(axis=0).min(axis=0)
 
     height_offset = MINS[1]
-    motions[:, :, 1] -= height_offset
+    #motions[:, :, 1] -= height_offset
     is_cuda = torch.cuda.is_available()
     j2s = joints2smpl(num_frames=frames, device_id=0, cuda=is_cuda)
     rot2xyz = Rotation2xyz(device=device)
@@ -142,8 +144,7 @@ def predict(clip_text):
     feat_clip_text = clip_model.encode_text(text).float()
     index_motion = trans_encoder.sample(feat_clip_text[0:1], False)
     pred_pose = net.forward_decoder(index_motion)
-    pose_param=(pred_pose * std + mean).float()
-    pred_xyz = recover_from_ric((pose_param).float(), 22)
+    pred_xyz = recover_from_ric((pred_pose * std + mean).float(), 22)
 
     return render(
         pred_xyz.detach().cpu().numpy().squeeze(axis=0)
@@ -156,6 +157,8 @@ if __name__ == "__main__":
         assert isinstance(prompts, list), "prompts must be list type"
     
     save_dict = dict()  # key: prompt, value: path to save
+
+    os.makedirs(output_root, exist_ok=True)
 
     for i, prompt in enumerate(tqdm(prompts)):
         vertices_3d = predict(clip_text=prompt)

@@ -80,7 +80,6 @@ def mesh2skeletons(
 
     motions = motions[::shrink_factor, :, :]  # step size = shrink_factor
     j_regressor = SMPL(gender='neutral').th_J_regressor.numpy()
-    face_kps_vertext = (331, 2802, 6262, 3489, 3990)
     nose_onehot = np.array([1 if i == 331 else 0 for i in range(j_regressor.shape[1])], dtype=np.float32).reshape((1, -1))
     left_eye_onehot = np.array([1 if i == 2802 else 0 for i in range(j_regressor.shape[1])], dtype=np.float32).reshape(1, -1)
     right_eye_onehot = np.array([1 if i == 6262 else 0 for i in range(j_regressor.shape[1])], dtype=np.float32).reshape(1, -1)
@@ -126,8 +125,8 @@ def mesh2skeletons(
 
     video_writer = cv2.VideoWriter(
         video_name,
-        cv2.VideoWriter_fourcc(*"mp4v"), 20, image_COCO[0].shape[:2]
-    )
+        cv2.VideoWriter_fourcc(*"mp4v"), 30, image_COCO[0].shape[:2]
+    )  # fps was 20
 
     print('making video')
 
@@ -147,7 +146,7 @@ if __name__ == '__main__':
     for prompt, mesh_path in prompt_meshpath.items():
         mesh_path = mesh_path[2:]
         mesh_path = os.path.join('../', "text2mesh", mesh_path)
-        mesh2skeletons(mesh_path, prompt, image_shape_, p_cam_, out_root, args.save_3d)
+        mesh2skeletons(mesh_path, None, image_shape_, p_cam_, out_root, args.save_3d)
 
     print("Done")
         
