@@ -67,7 +67,7 @@ def mesh2skeletons(
         mesh_path_or_mesh,
         save_name: str,
         image_shape: tuple,
-        p_cam:     str,
+        p_cam_or_none,
         output_root:str,
         save_3d: bool
 ):
@@ -76,9 +76,9 @@ def mesh2skeletons(
     else:
         motion_mesh = mesh_path_or_mesh
     motions = motion_mesh[0].permute(2, 0, 1)
-    shrink_factor = 3
+    shrink_factor = 1
 
-    motions = motions[::shrink_factor, :, :]
+    motions = motions[::shrink_factor, :, :]  # step size = shrink_factor
     j_regressor = SMPL(gender='neutral').th_J_regressor.numpy()
     face_kps_vertext = (331, 2802, 6262, 3489, 3990)
     nose_onehot = np.array([1 if i == 331 else 0 for i in range(j_regressor.shape[1])], dtype=np.float32).reshape((1, -1))
@@ -114,7 +114,7 @@ def mesh2skeletons(
     length=len(joint3D_COCO)
     #cam_param = skel.determine_cam_param(image_shape,cam_from=dist)
     jointPix_COCO = [
-        skel.draw_joint_at_Pixel_moving_camera(frame, image_shape, n,length,**DIRECTION_LOOKUP_TABLE[p_cam])
+        skel.draw_joint_at_Pixel_moving_camera(frame, image_shape, n,length,**DIRECTION_LOOKUP_TABLE[p_cam_or_none]) if p_cam_or_none is not None else skel.draw_joint_at_Pixel_moving_camera(frame, image_shape, n, length, "None", 5, [0,0], [2, 2], [0, 0, 0], [1.5, 1.5, 1.5])
         for n,frame in enumerate(joint3D_COCO)
     ]
     image_COCO = [
