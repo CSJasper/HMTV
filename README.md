@@ -33,6 +33,9 @@ pip install ftfy regex tqdm
 pip install git+https://github.com/openai/CLIP.git 
 ```
 
+You should download pretrained models of T2M-GPT.
+You can download by running /text2mesh/download_model.sh
+
 ## Demo
 Demo is available in `demo.ipynb`
 Before running demo you should run the script below
