@@ -4,4 +4,4 @@
 *.vts
 *.pkl
 
-text2video/Text2Video-Zero
+text2mesh/body_models/smpl/SMPL_NEUTRAL.pkl
