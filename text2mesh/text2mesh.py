@@ -113,7 +113,7 @@ def render(motions)->None:
     MINS = motions.min(axis=0).min(axis=0)
 
     height_offset = MINS[1]
-    #motions[:, :, 1] -= height_offset
+    motions[:, :, 1] -= height_offset
     is_cuda = torch.cuda.is_available()
     j2s = joints2smpl(num_frames=frames, device_id=0, cuda=is_cuda)
     rot2xyz = Rotation2xyz(device=device)
