@@ -1,6 +1,6 @@
 # Pytorch Implementation of paper "Human Motion Aware Text-to-Video Generation with Explicit Camera Control"
 
-Project page : https://anonymous.4open.science/w/HMTV_docs-5A6C/
+Project page :https://anonymous.4open.science/w/HMTV_docs-5A6C/
 (You should copy can paste url because of the bug.)
 
 
