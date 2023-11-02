@@ -5,7 +5,7 @@ Project page :https://anonymous.4open.science/w/HMTV_docs-5A6C/
 
 
 
-![Our frameworks](main_framework.jpg)
+![Our frameworks](assets/main_figure_final.jpg)
 
 ## Installation
 
@@ -38,8 +38,9 @@ You can download by running /text2mesh/download_model.sh
 
 ## Demo
 Demo is available in `demo.ipynb`
-Before running demo you should run the script below
+Before running demo you should run the script below.
 ```
+bash prepare_body_models.sh
 bash prepare_t2v.sh
 ```
 
