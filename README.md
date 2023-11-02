@@ -29,11 +29,16 @@ If you have trouble with `clip`, you can install with these scripts below
 
 ```
 pip install ftfy regex tqdm
+
 pip install git+https://github.com/openai/CLIP.git 
 ```
 
-You should download pretrained models of T2M-GPT.
-You can download by running /text2mesh/download_model.sh
+You should download pretrained models of T2M-GPT by running
+
+```
+cd ./text2motion
+bash ./download_model.sh
+```
 
 ## Demo
 Demo is available in `demo.ipynb`
