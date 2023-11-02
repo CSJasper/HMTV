@@ -1,11 +1,7 @@
 # Pytorch Implementation of paper "Human Motion Aware Text-to-Video Generation with Explicit Camera Control" (WACV 2024)
 
 
-## This repo is under modification. 
-
-Project page :https://anonymous.4open.science/w/HMTV_docs-5A6C/
-(You should copy can paste url because of the bug.)
-
+Our Project Page would be available soon.
 
 
 ![Our frameworks](assets/main_figure_final.jpg)
