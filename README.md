@@ -15,7 +15,7 @@ You can run this code with a single RTX 3090-24G
 Using `environment.yml`,
 ```
 conda env create -f environment.yml
-conda active hmtv
+conda activate hmtv
 ```
 or you can maunally create conda environment and use `requirements.txt` as below
 
