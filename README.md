@@ -51,7 +51,7 @@ Specifically, you need to run
 bash text2motion/dataset/prepare/download_model.sh
 nash text2motion/dataset/prepare/download_smpl.sh
 ```
-and npy files of mean and std.(`mean.npy`, `std.npy`)
+and download npy files of mean and std.(`mean.npy`, `std.npy`)
 
 The details are provided in this [link](https://github.com/Mael-zys/T2M-GPT).
 
