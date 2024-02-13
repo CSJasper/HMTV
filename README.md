@@ -47,7 +47,7 @@ After that you should download pretrained models, checkpoints and other things t
 
 Specifically, you need to run
 
-```
+```bash
 bash text2motion/dataset/prepare/download_model.sh
 nash text2motion/dataset/prepare/download_smpl.sh
 ```
@@ -65,13 +65,13 @@ If you want to try another T2V models run `clean_t2v.sh` before cloning them.
 We have discovered that there is an issue with the argument parser in certain environments. If you are experiencing the same problem, try changing the code as follows:
 
 Modify the code
-```
+```python
     return parser.parse_args()
 ```
 
 to 
 
-```
+```python
     return parser.parse_args(args=[])
 ```
  in `text2motion/options/option_transformer.py`
@@ -82,20 +82,20 @@ We provided demo code in our repo. However, in some case there might be differne
 
 In second code block in `demo.ipynb`, it would help if you change this code below
 
-```
+```python
 from text2motion.text2motion import predict
 ```
 
 to
 
-```
+```python
 from text2motion import predict
 ```
 
 Additionally, you must enter the absolute paths for mean and std, not the relative paths. This can be changed in the following section of text2motion/text2motion.py:"
 
-```
+```python
 mean = torch.from_numpy(np.load("YOUR ABSOLUTE PATH HERE"))
-std = torch.from_numpy(np.load(YOUR ABSOLUTE PATH HERE))
+std = torch.from_numpy(np.load("YOUR ABSOLUTE PATH HERE"))
 ```
 
