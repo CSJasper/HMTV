@@ -96,8 +96,8 @@ ckpt = torch.load(args.resume_trans, map_location="cpu")
 trans_encoder.load_state_dict(ckpt["trans"], strict=True)
 trans_encoder.eval()
 
-mean = torch.from_numpy(np.load(os.path.join(root_dir, "meta/Mean.npy")))
-std = torch.from_numpy(np.load(os.path.join(root_dir, "meta/Std.npy")))
+mean = torch.from_numpy(np.load(os.path.join(root_dir, "VQVAEV3_CB1024_CMT_H1024_NRES3/meta/mean.npy")))
+std = torch.from_numpy(np.load(os.path.join(root_dir, "VQVAEV3_CB1024_CMT_H1024_NRES3/meta/mean.npy")))
 
 
 if is_cuda:

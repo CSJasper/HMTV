@@ -33,20 +33,19 @@ pip install ftfy regex tqdm
 pip install git+https://github.com/openai/CLIP.git 
 ```
 
-You should download pretrained models of T2M-GPT by running
-
-```
-cd ./text2motion
-bash ./download_model.sh
-```
 
 ## Demo
 Demo is available in `demo.ipynb`
 Before running demo you should run the script below.
 ```
-bash prepare_body_models.sh
-bash prepare_t2v.sh
+bash prepare_t2v.sh  
 ```
+
+This script provides T2M model and one of the T2V model in the paper.
+
+After that you should download pretrained models, checkpoints and other things to run inference code for T2M model.
+
+The details are provided in this [link](https://github.com/Mael-zys/T2M-GPT).
 
 This script clone T2V-Zero and prepare the environment.
 
